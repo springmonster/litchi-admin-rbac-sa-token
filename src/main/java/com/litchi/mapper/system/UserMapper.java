@@ -1,7 +1,7 @@
-package com.litchi.dao.system;
+package com.litchi.mapper.system;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.litchi.entity.system.SysUserEntity;
+import com.litchi.entity.system.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Param;
  * Date 2023/9/28 11:37
  */
 @Mapper
-public interface SysUserDao extends BaseMapper<SysUserEntity> {
+public interface UserMapper extends BaseMapper<User> {
 
     /**
      * 根据用户名和密码查询
@@ -20,5 +20,5 @@ public interface SysUserDao extends BaseMapper<SysUserEntity> {
      * @param pwd String
      * @return SysUserEntity
      */
-    SysUserEntity selectByNameAndPwd(@Param("userName") String userName, @Param("pwd") String pwd);
+    User selectByNameAndPwd(@Param("userName") String userName, @Param("pwd") String pwd);
 }

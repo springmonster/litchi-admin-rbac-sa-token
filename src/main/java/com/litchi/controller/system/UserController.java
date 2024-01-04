@@ -5,7 +5,7 @@ import com.litchi.common.base.Result;
 import com.litchi.param.system.cmd.UserModifyCmd;
 import com.litchi.param.system.cmd.UserSaveCmd;
 import com.litchi.param.system.query.UserListQuery;
-import com.litchi.service.system.SysUserService;
+import com.litchi.service.system.IUserService;
 import jakarta.annotation.Resource;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.validation.annotation.Validated;
@@ -24,30 +24,30 @@ import static com.litchi.common.base.Result.*;
  */
 @Validated
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/system")
 public class UserController {
 
     @Resource
-    private SysUserService userService;
+    private IUserService IUserService;
 
     @GetMapping("/page")
     public Result page(@Validated UserListQuery userListQuery){
-        return ok(userService.page(userListQuery));
+        return ok(IUserService.page(userListQuery));
     }
 
     @PostMapping("/save")
     public Result save(@Validated @RequestBody UserSaveCmd userSaveCmd){
-        return ok(userService.save(userSaveCmd));
+        return ok(IUserService.save(userSaveCmd));
     }
 
     @PutMapping("/modify")
     public Result modify(@Validated @RequestBody UserModifyCmd userModifyCmd){
-        return ok(userService.update(userModifyCmd));
+        return ok(IUserService.update(userModifyCmd));
     }
 
     @DeleteMapping("/remove")
     public Result remove(@NotBlank(message = "ID不能为空") String id){
-        return ok(userService.removeByIds(Collections.singletonList(id)));
+        return ok(IUserService.removeByIds(Collections.singletonList(id)));
     }
 
 }

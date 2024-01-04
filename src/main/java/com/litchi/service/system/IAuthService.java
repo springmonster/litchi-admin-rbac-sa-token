@@ -9,7 +9,7 @@ import com.litchi.vo.system.LoginUserInfoVO;
  * Create by noah
  * Date 2023/10/7 14:00
  */
-public interface AuthService {
+public interface IAuthService {
 
 
     /**

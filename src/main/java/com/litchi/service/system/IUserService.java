@@ -3,7 +3,7 @@ package com.litchi.service.system;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.litchi.common.base.PageResp;
-import com.litchi.entity.system.SysUserEntity;
+import com.litchi.entity.system.User;
 import com.litchi.param.system.cmd.UserModifyCmd;
 import com.litchi.param.system.cmd.UserSaveCmd;
 import com.litchi.param.system.query.UserListQuery;
@@ -17,7 +17,7 @@ import java.util.List;
  * @author Noah gby_dev@163.com
  * @since 1.0.0 2023-09-26
  */
-public interface SysUserService extends IService<SysUserEntity> {
+public interface IUserService extends IService<User> {
 
     /**
      * 分页查询

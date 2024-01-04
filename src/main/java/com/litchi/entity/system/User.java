@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * 用户表
@@ -16,7 +16,7 @@ import java.util.Date;
 
 @Data
 @TableName("sys_user")
-public class SysUserEntity {
+public class User {
 	/**
 	* 主键
 	*/
@@ -49,7 +49,7 @@ public class SysUserEntity {
 	private String nickName;
 
 	/**
-	 * 性别
+	 * 用户性别: 0-男; 1-女; 2-未知
 	 */
 	private Integer sex;
 
@@ -71,7 +71,7 @@ public class SysUserEntity {
 	/**
 	* 创建时间
 	*/
-	private Date createTime;
+	private LocalDateTime createTime;
 
 	/**
 	* 修改人
@@ -81,6 +81,6 @@ public class SysUserEntity {
 	/**
 	* 修改时间
 	*/
-	private Date updateTime;
+	private LocalDateTime updateTime;
 
 }

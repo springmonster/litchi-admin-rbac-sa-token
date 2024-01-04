@@ -10,15 +10,14 @@ import com.litchi.common.base.BizException;
 import com.litchi.common.base.PageResp;
 import com.litchi.common.enums.ResultCodeEnum;
 import com.litchi.convert.system.SysUserConvert;
-import com.litchi.dao.system.SysUserDao;
-import com.litchi.entity.system.SysUserEntity;
+import com.litchi.mapper.system.UserMapper;
+import com.litchi.entity.system.User;
 import com.litchi.param.system.cmd.UserModifyCmd;
 import com.litchi.param.system.cmd.UserSaveCmd;
 import com.litchi.param.system.query.UserListQuery;
-import com.litchi.service.system.SysUserService;
+import com.litchi.service.system.IUserService;
 import com.litchi.vo.system.SysUserVO;
 import jakarta.annotation.Resource;
-import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,8 +32,7 @@ import java.util.Objects;
  * @since 1.0.0 2023-09-26
  */
 @Service
-@AllArgsConstructor
-public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> implements SysUserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
     @Resource
     private SysUserConvert userConvert;
@@ -42,7 +40,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 
     @Override
     public PageResp<SysUserVO> page(UserListQuery userListQuery) {
-        IPage<SysUserEntity> page = baseMapper.selectPage(new Page<>(userListQuery.getPageNo(), userListQuery.getPageSize()), getWrapper(userListQuery));
+        IPage<User> page = baseMapper.selectPage(new Page<>(userListQuery.getPageNo(), userListQuery.getPageSize()), getWrapper(userListQuery));
         List<SysUserVO> sysUserVOS = userConvert.convertList(page.getRecords());
         return new PageResp<>(page.getTotal(),page.getSize(),page.getCurrent(),sysUserVOS);
     }
@@ -52,17 +50,17 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
      * @param userListQuery UserListQuery
      * @return LambdaQueryWrapper<SysUserEntity>
      */
-    private LambdaQueryWrapper<SysUserEntity> getWrapper(UserListQuery userListQuery){
-        LambdaQueryWrapper<SysUserEntity> wrapper = Wrappers.lambdaQuery();
-        wrapper.eq(StringUtils.isNotEmpty(userListQuery.getUserName()), SysUserEntity::getUserName, userListQuery.getUserName());
-        wrapper.eq(StringUtils.isNotEmpty(userListQuery.getPhone()), SysUserEntity::getPhone, userListQuery.getPhone());
-        wrapper.eq(StringUtils.isNotEmpty(userListQuery.getEmail()), SysUserEntity::getEmail, userListQuery.getEmail());
+    private LambdaQueryWrapper<User> getWrapper(UserListQuery userListQuery){
+        LambdaQueryWrapper<User> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(StringUtils.isNotEmpty(userListQuery.getUserName()), User::getUserName, userListQuery.getUserName());
+        wrapper.eq(StringUtils.isNotEmpty(userListQuery.getPhone()), User::getPhone, userListQuery.getPhone());
+        wrapper.eq(StringUtils.isNotEmpty(userListQuery.getEmail()), User::getEmail, userListQuery.getEmail());
         return wrapper;
     }
 
     @Override
     public String save(UserSaveCmd userSaveCmd) {
-        SysUserEntity entity = userConvert.convert(userSaveCmd);
+        User entity = userConvert.convert(userSaveCmd);
         long userId = IdUtil.getSnowflakeNextId();
         entity.setId(userId);
         baseMapper.insert(entity);
@@ -71,7 +69,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 
     @Override
     public Boolean update(UserModifyCmd userModifyCmd) {
-        SysUserEntity sysUserEntity = baseMapper.selectById(userModifyCmd.getId());
+        User sysUserEntity = baseMapper.selectById(userModifyCmd.getId());
         if(Objects.isNull(sysUserEntity)){
             throw new BizException(ResultCodeEnum.USER_NOT_EXITS);
         }

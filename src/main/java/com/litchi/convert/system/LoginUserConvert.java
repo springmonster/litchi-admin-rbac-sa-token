@@ -1,7 +1,6 @@
 package com.litchi.convert.system;
 
-
-import com.litchi.entity.system.SysUserEntity;
+import com.litchi.entity.system.User;
 import com.litchi.vo.system.LoginUserInfoVO;
 import org.mapstruct.Mapper;
 
@@ -14,5 +13,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface LoginUserConvert {
 
-    LoginUserInfoVO convert(SysUserEntity entity);
+    LoginUserInfoVO convert(User user);
 }
