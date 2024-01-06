@@ -33,6 +33,40 @@ sa-token:
   # token 风格（默认可取值：uuid、simple-uuid、random-32、random-64、random-128、tik）
   token-style: uuid
 
+#springdoc相关配置
+springdoc:
+  swagger-ui:
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  group-configs:
+    - group: 'Litchi-Admin接口'
+      paths-to-match: '/**'
+      packages-to-scan: com.litchi    #按包路径匹配:一般到启动类的包名
+#knife4j相关配置 可以不用改
+knife4j:
+  openapi:
+    title: Litchi-Admin接口文档
+    description: Litchi-Admin接口文档
+    version: 1.0.0
+    termsOfServiceUrl: https://www.gengby.com
+    contact:
+      name: Noah
+      url: https://www.gengby.com
+      email: gby_dev@163.com
+  enable: true    #开启knife4j，无需添加@EnableKnife4j注解
+  setting:
+    language: zh_cn   #中文
+    swagger-model-name: 实体类   #重命名SwaggerModel名称,默认
+  #开启Swagger的Basic认证功能,默认是false
+  basic:
+    enable: true
+    # Basic认证用户名
+    username: Noah
+    # Basic认证密码
+    password: bing123
 
 
 

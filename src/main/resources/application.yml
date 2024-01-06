@@ -14,6 +14,7 @@ spring:
   output:
     ansi:
       enabled: always
+
 mybatis-plus:
   global-config:
     db-config:
@@ -23,7 +24,3 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
     call-setters-on-nulls: true
-
-
-
-
