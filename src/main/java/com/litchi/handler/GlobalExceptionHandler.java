@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Objects;
 
-import static com.litchi.common.base.Result.*;
+import static com.litchi.common.base.Result.fail;
 
 /**
  * Description:

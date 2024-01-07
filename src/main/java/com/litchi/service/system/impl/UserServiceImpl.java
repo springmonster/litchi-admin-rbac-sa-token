@@ -9,14 +9,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.litchi.common.base.BizException;
 import com.litchi.common.base.PageResp;
 import com.litchi.common.enums.ResultCodeEnum;
-import com.litchi.convert.system.SysUserConvert;
-import com.litchi.mapper.system.UserMapper;
+import com.litchi.convert.system.UserConvert;
 import com.litchi.entity.system.User;
+import com.litchi.mapper.system.UserMapper;
 import com.litchi.param.system.cmd.UserModifyCmd;
 import com.litchi.param.system.cmd.UserSaveCmd;
 import com.litchi.param.system.query.UserListQuery;
 import com.litchi.service.system.IUserService;
-import com.litchi.vo.system.SysUserVO;
+import com.litchi.vo.system.UserVO;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -35,20 +35,19 @@ import java.util.Objects;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
     @Resource
-    private SysUserConvert userConvert;
-
+    private UserConvert userConvert;
 
     @Override
-    public PageResp<SysUserVO> page(UserListQuery userListQuery) {
+    public PageResp<UserVO> page(UserListQuery userListQuery) {
         IPage<User> page = baseMapper.selectPage(new Page<>(userListQuery.getPageNo(), userListQuery.getPageSize()), getWrapper(userListQuery));
-        List<SysUserVO> sysUserVOS = userConvert.convertList(page.getRecords());
-        return new PageResp<>(page.getTotal(),page.getSize(),page.getCurrent(),sysUserVOS);
+        List<UserVO> userVOS = userConvert.convertList(page.getRecords());
+        return new PageResp<>(page.getTotal(),page.getSize(),page.getCurrent(), userVOS);
     }
 
     /**
      * 构造查询条件
      * @param userListQuery UserListQuery
-     * @return LambdaQueryWrapper<SysUserEntity>
+     * @return LambdaQueryWrapper<User>
      */
     private LambdaQueryWrapper<User> getWrapper(UserListQuery userListQuery){
         LambdaQueryWrapper<User> wrapper = Wrappers.lambdaQuery();
@@ -61,7 +60,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public String save(UserSaveCmd userSaveCmd) {
         User entity = userConvert.convert(userSaveCmd);
-        long userId = IdUtil.getSnowflakeNextId();
+        Long userId = IdUtil.getSnowflakeNextId();
         entity.setId(userId);
         baseMapper.insert(entity);
         return String.valueOf(userId);

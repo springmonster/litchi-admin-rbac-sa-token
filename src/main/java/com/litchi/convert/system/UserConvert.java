@@ -1,10 +1,10 @@
 package com.litchi.convert.system;
 
 import com.litchi.entity.system.User;
-import org.mapstruct.Mapper;
 import com.litchi.param.system.cmd.UserModifyCmd;
 import com.litchi.param.system.cmd.UserSaveCmd;
-import com.litchi.vo.system.SysUserVO;
+import com.litchi.vo.system.UserVO;
+import org.mapstruct.Mapper;
 
 import java.util.List;
 
@@ -15,14 +15,12 @@ import java.util.List;
 * @since 1.0.0 2023-09-26
 */
 @Mapper(componentModel = "spring")
-public interface SysUserConvert {
+public interface UserConvert {
 
     User convert(UserSaveCmd userSaveCmd);
 
     User convert(UserModifyCmd userModifyCmd);
 
-    SysUserVO convert(User entity);
-
-    List<SysUserVO> convertList(List<User> list);
+    List<UserVO> convertList(List<User> list);
 
 }

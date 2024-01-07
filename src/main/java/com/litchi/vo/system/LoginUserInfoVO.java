@@ -1,5 +1,6 @@
 package com.litchi.vo.system;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,45 +12,30 @@ import java.io.Serializable;
  * Date 2023/10/11 14:23
  */
 @Data
+@Schema(description = "登录用户信息")
 public class LoginUserInfoVO implements Serializable {
 
-    /**
-     * 主键
-     */
+    @Schema(description = "用户ID")
     private String id;
 
-    /**
-     * 用户名称
-     */
+    @Schema(description = "用户名称")
     private String userName;
 
-    /**
-     * 手机号
-     */
+    @Schema(description = "手机号")
     private String phone;
 
-    /**
-     * 邮箱
-     */
+    @Schema(description = "邮箱")
     private String email;
 
-    /**
-     * 昵称
-     */
+    @Schema(description = "昵称")
     private String nickName;
 
-    /**
-     * 性别
-     */
+    @Schema(description = "性别")
     private Integer sex;
 
-    /**
-     * 头像
-     */
+    @Schema(description = "头像")
     private String avatar;
 
-    /**
-     * 账号状态：0-正常，1-禁用
-     */
+    @Schema(description = "账号状态：0-正常，1-禁用")
     private Integer status;
 }

@@ -7,7 +7,7 @@ import com.litchi.entity.system.User;
 import com.litchi.param.system.cmd.UserModifyCmd;
 import com.litchi.param.system.cmd.UserSaveCmd;
 import com.litchi.param.system.query.UserListQuery;
-import com.litchi.vo.system.SysUserVO;
+import com.litchi.vo.system.UserVO;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public interface IUserService extends IService<User> {
      * @param userListQuery UserListQuery
      * @return PageResult<SysUserVO>
      */
-    PageResp<SysUserVO> page(UserListQuery userListQuery);
+    PageResp<UserVO> page(UserListQuery userListQuery);
 
     /**
      * 保存

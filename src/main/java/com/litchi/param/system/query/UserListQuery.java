@@ -1,6 +1,7 @@
 package com.litchi.param.system.query;
 
 import com.litchi.common.base.PageReq;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,32 +13,22 @@ import java.io.Serializable;
  * Create by noah
  * Date 2023/9/22 16:15
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
+@Schema(description = "用户查询参数")
+@EqualsAndHashCode(callSuper = true)
 public class UserListQuery extends PageReq implements Serializable {
 
-
-    /**
-     * 姓名
-     */
+    @Schema(description = "姓名")
     private String userName;
 
-
-    /**
-     * 手机号
-     */
+    @Schema(description = "手机号")
     private String phone;
 
-
-    /**
-     * 邮箱
-     */
+    @Schema(description = "邮箱")
     private String email;
 
-    /**
-     * 角色
-     */
-    private String role;
+    @Schema(description = "角色ID")
+    private String roleId;
 
 
 }
